@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Board from './board.js'
+import App from './App.js'
 
-class App extends Component {
+class Message extends Component {
   render() {
     return (
       <div className="App">
-        <Board />
+
       </div>
     );
   }
 }
 
-export default App;
+export default Message;
