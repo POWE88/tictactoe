@@ -6,19 +6,28 @@ class Box extends Component {
   constructor(props){
     super(props)
 
-    this.state = {isClicked:"false"}
+    this.state = {
+      isClicked: "false"
+    }
   }
 
   render() {
-
     return (
-      <div id="aBox" onClick={this.props.wasClicked} >
+      <div id="aBox" onClick={this.handleClick} >
 
-        {this.props.wasClicked()}
+        {this.props.display(this.state.isClicked)}
 
       </div>
     );
   }
+
+  handleClick = () =>{
+    this.setState({isClicked: "true"})
+
+    console.log("Box "+this.props.id);
+    console.log(this.state.isClicked);
+
+ }
 }
 
 
