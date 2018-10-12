@@ -8,42 +8,49 @@ class Board extends Component {
     super(props)
 
     this.state={
-        index: ['','','','','','','','','']
-
+        index: ['','','','','','','','',''],
+        p: "",
+        clickCount: 0,
+        player: "x",
+        isClicked: "false"
     }
   }
   render() {
-    for(let i=0; i < this.state.index.length; i++){
-      this.state.index[i] = {player: "x", isClicked: "false"}
-    }
+    // for(let i=0; i < this.state.index.length; i++){
+    //   this.state.index[i] = {player: "x", isClicked: "false"}
+    //   this.setState({})
+    // }
+    let boxes = this.state.index.map((box, i) => {
+      return (
+        <Box id={i} isClicked={"false"} wasClicked={this.handleClick.bind(this)} count={this.state.clickCount} />
+      )
+    })
 
     return (
           <div id="ourBoard">
-              <Box box0={this.state.index[0]} id={0} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box1={this.state.index[1]} id={1} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box2={this.state.index[2]} id={2} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box3={this.state.index[3]} id={3} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box4={this.state.index[4]} id={4} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box5={this.state.index[5]} id={5} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box6={this.state.index[6]} id={6} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box7={this.state.index[7]} id={7} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
-              <Box box8={this.state.index[8]} id={8} display={this.printOut} wasClicked = {this.handleClick.bind(this)}/>
+            {boxes}
           </div>
     );
   }
-  printOut = (bool) => {
-    if(bool === "true"){
-      console.log("X was supposed to happen");
-      return "X"
-    }else{
-      return "O"
-    }
 
+  // togglePlayer = () => {
+  //   if(this.state.clickCount%2==0){
+  //     this.setState({p:"O"})
+  //   }else{
+  //     this.setState({p:"X"})
+  //   }
+  //
+  //   return this.state.p
+  // }
 
-  }
+  handleClick = () => {
+    console.log("Board ");
+    console.log(this.state.clickCount);
+    this.setState({
+      clickCount: this.state.clickCount+1,
+      //set some other state, isClicked
+    })
 
-  handleClick = (id) => {
-    console.log("Board "+id);
     // let boxState = this.state.index[id].isClicked
     // this.setState({boxState: "true"})
     // console.log(boxState);

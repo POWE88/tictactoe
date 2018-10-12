@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Board from './board.js'
 
 class Box extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      isClicked: "false"
+      isClicked: "true"
     }
   }
 
@@ -15,18 +14,26 @@ class Box extends Component {
     return (
       <div id="aBox" onClick={this.handleClick} >
 
-        {this.props.display(this.state.isClicked)}
+        {this.printOut(this.props.isClicked)}
 
       </div>
     );
   }
 
   handleClick = () =>{
-    this.setState({isClicked: "true"})
+    this.setState({isClicked: "false"})
+    this.props.wasClicked();
 
-    console.log("Box "+this.props.id);
-    console.log(this.state.isClicked);
-
+ }
+ printOut = (iC) => {
+   console.log(iC + " " + this.props.count);
+   if(iC === "true" & this.props.count%2===0){
+     return "X"
+   }else if(iC === "true" & this.props.count%2===1){
+     return "O"
+   }else{
+     return "ELSE"
+   }
  }
 }
 
