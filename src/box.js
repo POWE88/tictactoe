@@ -6,35 +6,32 @@ class Box extends Component {
     super(props)
 
     this.state = {
-      isClicked: "true"
+      isClicked: ""
     }
   }
 
   render() {
     return (
-      <div id="aBox" onClick={this.handleClick} >
-
-        {this.printOut(this.props.isClicked)}
+      <div id="aBox" onClick={this.handleClickChild} >
+        {this.state.isClicked}
 
       </div>
     );
   }
 
-  handleClick = () =>{
-    this.setState({isClicked: "false"})
-    this.props.wasClicked();
+//handleClick
+//change isClicked state to true
+handleClickChild = () => {
+  this.props.handleClickParent(this.state.isClicked)
+  if(this.props.count % 2 === 0 && this.state.isClicked === "")
+  {
+    this.setState({isClicked: "X"})
+  }else if(this.props.count % 2 === 1 && this.state.isClicked === ""){
+    this.setState({isClicked: "O"})
 
- }
- printOut = (iC) => {
-   console.log(iC + " " + this.props.count);
-   if(iC === "true" & this.props.count%2===0){
-     return "X"
-   }else if(iC === "true" & this.props.count%2===1){
-     return "O"
-   }else{
-     return "ELSE"
-   }
- }
+  }
+}
+
 }
 
 
