@@ -14,7 +14,7 @@ class Box extends Component {
     return (
       <div id="aBox" onClick={this.handleClickChild} >
         {this.state.isClicked}
-
+        {this.props.id}
       </div>
     );
   }
@@ -22,7 +22,7 @@ class Box extends Component {
 //handleClick
 //change isClicked state to true
 handleClickChild = () => {
-  this.props.handleClickParent(this.state.isClicked)
+
   if(this.props.count % 2 === 0 && this.state.isClicked === "")
   {
     this.setState({isClicked: "X"})
@@ -30,6 +30,7 @@ handleClickChild = () => {
     this.setState({isClicked: "O"})
 
   }
+  this.props.handleClickParent(this.state.isClicked, this.props.id)
 }
 
 }
