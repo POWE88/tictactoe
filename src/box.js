@@ -6,15 +6,15 @@ class Box extends Component {
     super(props)
 
     this.state = {
-      isClicked: ""
+      isClicked: false,
+      player: ""
     }
   }
 
   render() {
     return (
-      <div id="aBox" onClick={this.handleClickChild} >
-        {this.state.isClicked}
-        {this.props.id}
+      <div id="aBox" onClick={this.handleClickChild}>
+        {this.state.player}
       </div>
     );
   }
@@ -22,15 +22,42 @@ class Box extends Component {
 //handleClick
 //change isClicked state to true
 handleClickChild = () => {
+//  let {player} = this.state
+  let {isClicked} = this.state
 
-  if(this.props.count % 2 === 0 && this.state.isClicked === "")
-  {
-    this.setState({isClicked: "X"})
-  }else if(this.props.count % 2 === 1 && this.state.isClicked === ""){
-    this.setState({isClicked: "O"})
-
+  //Update parent when isClicked is false
+  if(!isClicked){
+    console.log("Child click");
+    let cPlayer = this.props.setPlayer()
+    console.log("cPlayer: " + cPlayer);
+    isClicked = true
+    this.props.handleClickParent(this.props.id, cPlayer)
+    this.setState({isClicked: isClicked, player: cPlayer})
   }
-  this.props.handleClickParent(this.state.isClicked, this.props.id)
+
+
+
+
+  // if(this.props.count % 2 === 0 && !this.props.isClicked)
+  // {
+  //
+  //   player = "X"
+  //   console.log("I'm handleClickChild for X: " + player);
+  //   console.log("I'm happening");
+  //   this.props.handleClickParent(isClicked, this.props.id, player)
+  //
+  //   this.setState({player: player})
+  // }else if(this.props.count % 2 === 1 && !this.props.isClicked){
+  //   player = "O"
+  //   console.log("I'm handleClickChild for O: " + player);
+  //   console.log("I'm happening");
+  //   this.props.handleClickParent(isClicked, this.props.id, player)
+  //
+  //   this.setState({player: player})
+
+
+
+
 }
 
 }
