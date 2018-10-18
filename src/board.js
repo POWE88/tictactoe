@@ -11,7 +11,7 @@ class Board extends Component {
         index: ['','','','','','','','',''],
         clickCount: 0,
         isClicked: false,
-        message: "",
+        message: "Player ☠️ will start.",
         player: "default",
         isActive: true,
         movesArr: ['','','','','','','','',''],
@@ -31,8 +31,9 @@ class Board extends Component {
     })
     return (
           <div id="ourBoard">
+            <h1>Spook-Tac-Toe!!</h1>
             {boxes}
-            {this.state.message}
+            <p>{this.state.message}</p>
           </div>
     );
   }
@@ -58,9 +59,9 @@ class Board extends Component {
 
     if(this.state.clickCount % 2 === 0)
     {
-      return "X"
+      return "☠️"
     }else if(this.state.clickCount % 2 === 1){
-      return "O"
+      return "🎃"
     }
   }
 
@@ -85,10 +86,10 @@ class Board extends Component {
 
   createMessage = (player, boxID) => {
     let nextPlayer
-    if(player === "X"){
-      nextPlayer = "O"
+    if(player === "☠️"){
+      nextPlayer = "🎃"
     }else{
-      nextPlayer = "X"
+      nextPlayer = "☠️"
     }
 
     if(this.isWinner()){
@@ -96,7 +97,7 @@ class Board extends Component {
     }else if(this.state.clickCount === 8){
       return `GAME OVER, LOSERS!`
     }else{
-      return `${this.state.clickCount + 1}. Player ${player} moved to box ${boxID + 1}! Now it's
+      return `Player ${player} moved to box ${boxID + 1}! Now it's
       player ${nextPlayer}'s turn.`
     }
  }

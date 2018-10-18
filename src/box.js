@@ -33,7 +33,7 @@ handleClickChild = () => {
     isClicked = true
     this.props.handleClickParent(this.props.id, cPlayer)
     this.setState({isClicked: isClicked, player: cPlayer})
-  }
+  } 
 }
 
 }

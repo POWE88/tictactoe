@@ -6,6 +6,9 @@
   display: flex;
   height: 100vh;
   width: 100vw;
+  background-image: url(https://slack-imgs.com/?c=1&url=http%3A%2F%2Fnewwallpapers1.com%2Fwp-content%2Fuploads%2F2017%2F10%2Fhalloween-background-4.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @keyframes App-logo-spin {
@@ -24,17 +27,32 @@ div{
 }
 
 #ourBoard{
-  /*animation: App-logo-spin infinite 150s linear;*/
+  /*animation: App-logo-spin infinite 5s linear;*/
+
   height: 300px;
   width: 302px;
-  border: 1px solid black;
+
   display: flex;
-  margin-top: 30px;
+  margin-top: 150px;
   flex-wrap: wrap;
   justify-content: center;
 }
+#ourBoard p {
+  font-size: 50px;
+  min-width: 600px;
+}
+#ourBoard h1 {
+  font-size: 60px;
+  color: white;
+  min-width: 500px;
+}
 
 #aBox{
+
+  font-size: 80px;
+  color: white;
+  user-select: none;
+  text-align: center;
   height: 100px;
   max-width: 100px;
   float: left;
