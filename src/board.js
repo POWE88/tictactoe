@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import App from './App.js'
 import Box from './box.js'
-import Message from './message.js'
 
 class Board extends Component {
   constructor(props){
@@ -12,8 +11,9 @@ class Board extends Component {
         index: ['','','','','','','','',''],
         clickCount: 0,
         isClicked: false,
-        message: "message",
+        message: "",
         player: "default",
+        isActive: true,
         movesArr: ['','','','','','','','',''],
         winArr: [[0, 1, 2], [3, 4, 5], [6, 7, 8],
                  [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -26,13 +26,13 @@ class Board extends Component {
     let boxes = this.state.index.map((box, i) => {
       return (
 
-        <Box id={i} isClicked={false} setPlayer={this.setPlayer} handleClickParent={this.handleClickParent} player={this.state.player}/>
+        <Box id={i} isClicked={false} setPlayer={this.setPlayer} handleClickParent={this.handleClickParent} player={this.state.player} isActive={this.state.isActive}/>
       )
     })
     return (
           <div id="ourBoard">
             {boxes}
-            <Message message={this.state.message}/>
+            {this.state.message}
           </div>
     );
   }
@@ -44,12 +44,8 @@ class Board extends Component {
     let {movesArr, message} = this.state
     movesArr[boxIndex] = cPlayer
     if(this.isWinner()){
-      alert(`${cPlayer} was the winner!`)
-      this.setState({index: ['','','','','','','','',''],
-                    clickCount: 0,
-                    isClicked: false,
-                    player: "default",
-                    movesArr: ['','','','','','','','','']})
+      //alert(`${cPlayer} was the winner!`)
+      this.setState({ isActive: false })
 
     }
     message = this.createMessage(cPlayer, boxIndex)
@@ -69,13 +65,13 @@ class Board extends Component {
   }
 
   isWinner = () => {
+    console.log("In winner")
     let bool = false
     //take in the this.state.movesArr
     //compare with this.state.winArr
     let {movesArr, winArr} = this.state
       for(let i=0; i<winArr.length; i++){
         let [a,b,c] = winArr[i]
-
         if(movesArr[a] === movesArr[b] && movesArr[a] === movesArr[c] && movesArr[a] != ""){
             bool = true
             break
@@ -84,16 +80,26 @@ class Board extends Component {
         }
       }
       return bool
+
   }
 
   createMessage = (player, boxID) => {
-    return `${this.state.clickCount + 1}. Player ${player} moved to box ${boxID + 1}`
-  }
+    let nextPlayer
+    if(player === "X"){
+      nextPlayer = "O"
+    }else{
+      nextPlayer = "X"
+    }
 
-  storeMessage = () => {
-    messages.push(this.props.message)
-    this.setState({messages: messages})
-  }
+    if(this.isWinner()){
+      return `Player ${player} has won!`
+    }else if(this.state.clickCount === 8){
+      return `GAME OVER, LOSERS!`
+    }else{
+      return `${this.state.clickCount + 1}. Player ${player} moved to box ${boxID + 1}! Now it's
+      player ${nextPlayer}'s turn.`
+    }
+ }
 }
 
 export default Board;

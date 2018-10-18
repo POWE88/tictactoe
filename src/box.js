@@ -19,20 +19,22 @@ class Box extends Component {
     );
   }
 
-  //handleClick
-  //change isClicked state to true
-  handleClickChild = () => {
-    let {isClicked} = this.state
+//handleClick
+//change isClicked state to true
+handleClickChild = () => {
+//  let {player} = this.state
+  let {isClicked} = this.state
 
-    //Update parent when isClicked is false
-    if(!isClicked){
-      console.log("Child click");
-      let cPlayer = this.props.setPlayer()
-      isClicked = true
-      this.props.handleClickParent(this.props.id, cPlayer)
-      this.setState({isClicked: isClicked, player: cPlayer})
-    }
+  //Update parent when isClicked is false
+  if(!isClicked && this.props.isActive){
+    console.log("Child click");
+    let cPlayer = this.props.setPlayer()
+    console.log("cPlayer: " + cPlayer);
+    isClicked = true
+    this.props.handleClickParent(this.props.id, cPlayer)
+    this.setState({isClicked: isClicked, player: cPlayer})
   }
+}
 
 }
 
